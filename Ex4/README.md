@@ -1,91 +1,125 @@
-# Pacman Rules
+# Freelancer Rates
 
-Welcome to Pacman Rules on Exercism's Elixir Track.
+Welcome to Freelancer Rates on Exercism's Elixir Track.
 If you need help running the tests or submitting your code, check out `HELP.md`.
 If you get stuck on the exercise, check out `HINTS.md`, but try and solve it without using those first :)
 
 ## Introduction
 
-## Booleans
+## Integers
 
-Elixir represents true and false values with the boolean type. There are only two values: `true` and `false`. These values can be bound to a variable:
+There are two different kinds of numbers in Elixir - integers and floats.
 
-```elixir
-true_variable = true
-false_variable = false
-```
-
-We can evaluate strict boolean expressions using the `and/2`, `or/2`, and `not/1` operators.
+Integers are whole numbers.
 
 ```elixir
-true_variable = true and true
-false_variable = true and false
-
-true_variable = false or true
-false_variable = false or false
-
-true_variable = not false
-false_variable = not true
+integer = 3
+# => 3
 ```
 
-When writing a function that returns a boolean value, it is idiomatic to end the function name with a `?`. The same convention can be used for variables that store boolean values.
+## Floating Point Numbers
+
+Floats are numbers with one or more digits behind the decimal separator. They use the 64-bit double precision floating-point format.
 
 ```elixir
-def either_true?(a?, b?) do
-  a? or b?
-end
+float = 3.45
+# => 3.45
 ```
+
+### Working with numbers
+
+In the [`Integer`][integer-functions] and [`Float`][float-functions] modules you can find some useful functions for working with those types. Basic arithmetic operators are defined in the [`Kernel`][kernel-arithmetic-operators] module.
+
+### Conversion
+
+Integers and floats can be mixed together in a single arithmetic expression. Using a float in an expression ensures the result will be a float too.
+
+```elixir
+2 * 3
+# => 6
+
+2 * 3.0
+# => 6.0
+```
+
+However, when doing division, the result will always be a float, even if only integers are used.
+
+```elixir
+6 / 2
+# => 3.0
+```
+
+To convert a float to an integer, you can discard the decimal part with [`trunc/1`][trunc-1].
+
+[integer-functions]: https://hexdocs.pm/elixir/Integer.html#functions
+[float-functions]: https://hexdocs.pm/elixir/Float.html#functions
+[kernel-arithmetic-operators]: https://hexdocs.pm/elixir/Kernel.html#*/2
+[trunc-1]: https://hexdocs.pm/elixir/Kernel.html#trunc/1
 
 ## Instructions
 
-In this exercise, you need to translate some rules from the classic game Pac-Man into Elixir functions.
+In this exercise you'll be writing code to help a freelancer communicate with a project manager by providing a few utilities to quickly calculate daily and
+monthly rates, optionally with a given discount.
 
-You have four rules to translate, all related to the game states.
+We first establish a few rules between the freelancer and the project manager:
 
-> Don't worry about how the arguments are derived, just focus on combining the arguments to return the intended result.
+- The daily rate is 8 times the hourly rate.
+- A month has 22 billable days.
 
-## 1. Define if Pac-Man eats a ghost
+Sometimes, the freelancer is offering to apply a discount on their daily rate (for example for their most loyal customers or for non-for-profit customers).
 
-Define the `Rules.eat_ghost?/2` function that takes two arguments (_if Pac-Man has a power pellet active_ and _if Pac-Man is touching a ghost_) and returns a boolean value if Pac-Man is able to eat the ghost. The function should return true only if Pac-Man has a power pellet active and is touching a ghost.
+Discounts are modeled as fractional numbers representing percentage, for example `25.0` (25%).
 
-```elixir
-Rules.eat_ghost?(false, true)
-# => false
-```
+## 1. Calculate the daily rate given an hourly rate
 
-## 2. Define if Pac-Man scores
-
-Define the `Rules.score?/2` function that takes two arguments (_if Pac-Man is touching a power pellet_ and _if Pac-Man is touching a dot_) and returns a boolean value if Pac-Man scored. The function should return true if Pac-Man is touching a power pellet or a dot.
+Implement a function to calculate the daily rate given an hourly rate:
 
 ```elixir
-Rules.score?(true, true)
-# => true
+FreelancerRates.daily_rate(60)
+# => 480.0
 ```
 
-## 3. Define if Pac-Man loses
+The returned daily rate should be a float.
 
-Define the `Rules.lose?/2` function that takes two arguments (_if Pac-Man has a power pellet active_ and _if Pac-Man is touching a ghost_) and returns a boolean value if Pac-Man loses. The function should return true if Pac-Man is touching a ghost and does not have a power pellet active.
+## 2. Calculate a discounted price
+
+Implement a function to calculate the price after a discount.
 
 ```elixir
-Rules.lose?(false, true)
-# => true
+FreelancerRates.apply_discount(150, 10)
+# => 135.0
 ```
 
-## 4. Define if Pac-Man wins
+The returned value should always be a float, not rounded in any way.
 
-Define the `Rules.win?/3` function that takes three arguments (_if Pac-Man has eaten all of the dots_, _if Pac-Man has a power pellet active_, and _if Pac-Man is touching a ghost_) and returns a boolean value if Pac-Man wins. The function should return true if Pac-Man has eaten all of the dots and has not lost based on the arguments defined in part 3.
+## 3. Calculate the monthly rate, given an hourly rate and a discount
+
+Implement a function to calculate the monthly rate, and apply a discount:
 
 ```elixir
-Rules.win?(false, true, false)
-# => false
+FreelancerRates.monthly_rate(77, 10.5)
+# => 12130
 ```
+
+The returned monthly rate should be rounded up (take the ceiling) to the nearest integer.
+
+## 4. Calculate the number of workdays given a budget, hourly rate and discount
+
+Implement a function that takes a budget, an hourly rate, and a discount, and calculates how many days of work that covers.
+
+```elixir
+FreelancerRates.days_in_budget(20000, 80, 11.0)
+# => 35.1
+```
+
+The returned number of days should be rounded down (take the floor) to one decimal place.
 
 ## Source
 
 ### Created by
 
-- @neenjaw
+- @angelikatyborska
 
 ### Contributed to by
 
-- @Cohen-Carlisle
+- @neenjaw

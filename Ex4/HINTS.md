@@ -2,29 +2,29 @@
 
 ## General
 
-- Don't worry about how the arguments are derived, just focus on combining the arguments to return the intended result.
+- Read about basic arithmetic in the official [Getting Started guide][getting-started-basic-arithmetic].
+- Browse the [`Float`][float-functions] and [`Kernel`][kernel-arithmetic-operators] modules to learn about functions and operators that work with floats.
 
-## 1. Define if pac-man can eat a ghost
+## 1. Calculate the daily rate given an hourly rate
 
-- The function must return a [boolean][boolean] value.
-- You can use the [boolean][boolean] operator [`and/2`][boolean-and] to combine the arguments for a result.
+- [Basic arithmetic operations][kernel-arithmetic-operators] where one argument is an integer, and the other is a float, will return a float.
 
-## 2. Define if pac-man scores
+## 2. Calculate a discounted price
 
-- The function must return a [boolean][boolean] value.
-- You can use the [boolean][boolean] operator [`or/2`][boolean-or] to combine the arguments for a result.
+- [Basic arithmetic operations][kernel-arithmetic-operators] where one argument is an integer, and the other is a float, will return a float.
 
-## 3. Define if pac-man loses
+## 3. Calculate the monthly rate, given an hourly rate and a discount
 
-- The function must return a [boolean][boolean] value.
-- You can use the [boolean][boolean] operators [`and/2`][boolean-and] and [`not/1`][boolean-not] to combine the arguments for a result.
+- There is a [built-in function][kernel-trunc] for changing floats to integers.
+- There is a [built-in function][float-ceil] for rounding floats up.
 
-## 4. Define if pac-man wins
+## 4. Calculate the number of workdays given a budget, hourly rate and discount
 
-- The function must return a [boolean][boolean] value.
-- You can use the [boolean][boolean] operators [`and/2`][boolean-and] and [`not/1`][boolean-not] to combine the arguments and results of one of the previously implemented functions.
+- There is a [built-in function][float-floor] for rounding floats down with desired precision.
 
-[boolean]: https://hexdocs.pm/elixir/basic-types.html#booleans-and-nil
-[boolean-and]: https://hexdocs.pm/elixir/Kernel.html#and/2
-[boolean-or]: https://hexdocs.pm/elixir/Kernel.html#or/2
-[boolean-not]: https://hexdocs.pm/elixir/Kernel.html#not/1
+[getting-started-basic-arithmetic]: https://hexdocs.pm/elixir/basic-types.html#basic-arithmetic
+[kernel-arithmetic-operators]: https://hexdocs.pm/elixir/Kernel.html#*/2
+[kernel-trunc]: https://hexdocs.pm/elixir/Kernel.html#trunc/1
+[float-functions]: https://hexdocs.pm/elixir/Float.html#functions
+[float-ceil]: https://hexdocs.pm/elixir/Float.html#ceil/2
+[float-floor]: https://hexdocs.pm/elixir/Float.html#floor/2
