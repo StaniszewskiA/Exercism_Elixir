@@ -7,8 +7,7 @@ defmodule LanguageList do
     [language | list]
   end
 
-  def remove(list) do
-    [_ | tail] = list
+  def remove([_ | tail]) do
     tail
   end
 
